@@ -1,0 +1,62 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Onion Archive</title>
+    </head>
+    <body>
+    <form>
+    <div>
+        <label for="start">Select date</label>
+        <input type="date" id="date_selector" name="date_selector"
+               value={{date}}
+               min="2018-01-01" max="2018-12-31" />
+        <input type="submit" value="search">
+    </div>
+    </form>
+
+    {% if hour == "00:00" %}
+    <p>00:00 / <a href="{% url 'main_view_reload' date '12:00' %}">12:00</a></p>
+    {% endif %}
+    {% if hour == "12:00" %}
+    <p><a href="{% url 'main_view_reload' date '00:00' %}">00:00</a> / 12:00</p> 
+    {% endif %}
+
+    <h2 align = "center"><{{date}} {{hour}} HS list and state></h2>
+    <style>  
+    .main_table { border-collapse:collapse;}  
+    .main_table th, .main_table td { border:1px solid black; }
+    </style>
+
+    <table class="main_table" align = "center" valign = "middle">
+    {% if d %}
+        <table class="main_table" align = "center" valign = "middle">
+        <tr align = "center" valign = "middle" style = "background-color:violet;">
+            <th>Title</th>
+            <th>Onion address</th>
+            <th>Contents</th>
+            <th>State</th>
+            <th>Bitcoin Address</th>
+        </tr>
+        {% for k in d %}
+        <tr align = "center" valign = "middle">
+            
+                <td><b>{{ k.title }}</b></td>
+                <td><b>{{ k.onion_address }}</b></td>
+                <td><b>{{ k.contents }}</b></td>
+                {% if k.state == "live" %}
+                    <td><b style="color:#0080ff;">{{ k.state }}</b></td>
+                {% else %}
+                    <td><b style="color:#df0101;">{{ k.state }}</b></td>
+                {% endif %}
+                {% if k.bitcoin_wallet_address|length == 0 %}
+                    <td><b>None</b></td>
+                {% else %}
+                    <td><b><a href="{% url 'bitcoin_list_view_load' date hour k.onion_address|cut:'http://' %}">{{ k.bitcoin_wallet_address|length }}</a></b></td>
+                {% endif %}
+        </tr>        
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
+

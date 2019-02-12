@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>{{btc_address}} Transaction Tracking</title>
+    </head>
+    <body>
+    <style>  
+    .main_table { border-collapse:collapse;}  
+    .main_table th, .main_table td { border:1px solid black; padding: 10px;}
+    </style>
+    <h1 align = "center" valign = "middle">[{{btc_address}}] Current Transaction</h1>
+    <h3 align = "right" valign = "middle" style="padding-right:20px;">Total Transaction : {{transaction.transaction_frequency}}</h3>
+    <h3 align = "right" valign = "middle" style="padding-right:20px;">Remain BTC : {{transaction.remain_val}} BTC</h3>
+    {% if transaction %}
+        <table class="main_table" align = "center" valign = "middle">
+        <tr align = "center">
+            <th>Transaction date</th>
+            <th style="background-color:#fcad4b;">Sender's Wallet Address</th>
+            <th style="background-color:#4b9dfc;">Receiver's Wallet Address</th>
+            <th>BTC Value</th>
+        </tr>
+        {% for log in transaction.transaction_list %}
+        {% if log.timestamp != "No Transaction" %}
+            <tr>
+                <td align = "center">{{log.timestamp}}</td>
+                <td>            
+                {% for input_address in log.input_address %}
+                    {% if input_address == btc_address %}
+                        <p style="color:gray">{{input_address}}</p>
+                    {% else %}
+                        <p style="color:#fcad4b;"><b>{{input_address}}</b></p>
+                    {% endif %}
+                {% endfor %}
+                </td>
+                <td>            
+                {% for output_address in log.output_address %}
+                    {% if output_address == btc_address %}
+                        <p style="color:gray;">{{output_address}}</p>
+                    {% else %}
+                        <p style="color:#4b9dfc;"><b>{{output_address}}</b></p>
+                    {% endif %}
+                {% endfor %}
+                </td>
+                <td align = "right">            
+                {% for output_value in log.output_value %}
+                <p>{{output_value}}</p>
+                {% endfor %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td align = "center">{{log.timestamp}}</td>
+                <td align = "center">{{log.timestamp}}</td>
+                <td align = "center">{{log.timestamp}}</td>
+                <td align = "center">{{log.timestamp}}</td>
+            </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
+

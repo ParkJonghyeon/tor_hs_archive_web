@@ -1,0 +1,49 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Onion Archive</title>
+    </head>
+    <body>
+    <form>
+    <div>
+        <label for="start">Select date</label>
+        <input type="date" id="date_selector" name="date_selector"
+               value={{date}}
+               min="2018-01-01" max="2018-12-31" />
+        <input type="submit" value="search">
+    </div>
+    </form>
+
+    <style>  
+    .main_table { border-collapse:collapse;}  
+    .main_table th, .main_table td { border:1px solid black; }
+    </style>
+
+    <table class="main_table" align = "center" valign = "middle">
+    <tr align = "center" valign = "middle" style = "background-color:violet;">
+        <th>숨겨진 서비스 콘텐츠 분포</th>
+        <th>매일 발견 된 새로운 onion 주소</th>
+    </tr>
+    <tr>
+    <td>
+        <iframe width="1000" height="580" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQz5I1uIwzlq93jnil7tpiBBg9vYGQaW4IrJjihzcDmAOhgKL0jW3B4Ndf_m4lTmTdBeq7LrzrwdQM/pubchart?oid=88212245&amp;format=interactive"></iframe>
+    </td>
+    <td>
+        <iframe width="940" height="580" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQz5I1uIwzlq93jnil7tpiBBg9vYGQaW4IrJjihzcDmAOhgKL0jW3B4Ndf_m4lTmTdBeq7LrzrwdQM/pubchart?oid=2036529957&amp;format=interactive"></iframe>
+    </td>
+    </tr>
+    <tr align = "center" valign = "middle" style = "background-color:violet;">
+        <th>전체 Live/Dead 숨겨진 서비스</th>
+        <th></th>
+    </tr>
+    <tr>
+    <td>
+        <iframe width="940" height="580" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQz5I1uIwzlq93jnil7tpiBBg9vYGQaW4IrJjihzcDmAOhgKL0jW3B4Ndf_m4lTmTdBeq7LrzrwdQM/pubchart?oid=1419052782&amp;format=interactive"></iframe>
+    </td>
+    <td>
+
+    </td>
+    </tr>
+</body>
+</html>
+

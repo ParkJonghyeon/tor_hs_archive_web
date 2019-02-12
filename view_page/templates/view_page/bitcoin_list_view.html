@@ -1,0 +1,24 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>{{d.onion_address}} bitcoin wallet address list</title>
+    </head>
+    <body>
+    
+    <h2 align = "center"><{{date}} {{hour}} "{{d.onion_address}}" bitcoin wallet address list></h2>
+    <style>  
+    .main_table { border-collapse:collapse;}  
+    .main_table th, .main_table td { border:1px solid black; }
+    </style>
+    {% if d %}
+        <table class="main_table" align = "center" valign = "middle">
+        {% for k in d.bitcoin_wallet_address %}
+        <tr align = "center" valign = "middle">
+                <td><b><a href="{% url 'bitcoin_transaction_view_load' k %}">{{ k }}</a></b></td>
+        </tr>        
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
+
